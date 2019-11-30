@@ -1,15 +1,15 @@
 export default {
     s3: {
-        REGION: "YOUR_S3_UPLOADS_BUCKET_REGION",
-        BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
+        REGION: "us-east-1",
+        BUCKET: "chmurex-priv-216929"
     },
     apiGateway: {
-        REGION: "YOUR_API_GATEWAY_REGION",
+        REGION: "us-east-1",
         URL: "YOUR_API_GATEWAY_URL"
     },
     cognito: {
-        REGION: "YOUR_COGNITO_REGION",
-        USER_POOL_ID: "YOUR_COGNITO_USER_POOL_ID",
-        APP_CLIENT_ID: "YOUR_COGNITO_APP_CLIENT_ID",
+        REGION: "us-east-1",
+        USER_POOL_ID: "us-east-1_Cb75QZCzu",
+        APP_CLIENT_ID: "60n79s4fgcqarcjq8a6et5e1k0",
         IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID"
     }
