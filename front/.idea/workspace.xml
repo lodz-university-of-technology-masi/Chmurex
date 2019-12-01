@@ -2,40 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d2f16a8-2edf-4960-9d39-03a4abcc902d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/libraries/Maven__com_amazonaws_aws_lambda_java_core_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/HelloWorldFunction/HelloWorld.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/HelloWorldFunction/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/HelloWorldFunction/src/main/java/helloworld/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/HelloWorldFunction/src/main/java/helloworld/GatewayResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/HelloWorldFunction/src/test/java/helloworld/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/back.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/events/event.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Back/template.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netlify.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Back/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/createTest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/handler.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/serverless.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Back/tests/handler.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/createTest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/handler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/serverless.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sdfBack/tests/handler.test.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +73,7 @@
       <workItem from="1575023557902" duration="28000" />
       <workItem from="1575023588287" duration="6723000" />
       <workItem from="1575225568682" duration="5342000" />
+      <workItem from="1575237315052" duration="440000" />
     </task>
     <servers />
   </component>
