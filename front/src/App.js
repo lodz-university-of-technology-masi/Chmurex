@@ -4,6 +4,7 @@ import { Nav, Navbar, NavItem } from "react-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap";
+import logo from "./containers/najlepszeLogo.png";
 
 function App(props) {
     return (
@@ -11,7 +12,7 @@ function App(props) {
             <Navbar fluid collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="/">Scratch</Link>
+                        <Link to="/">Recruit</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

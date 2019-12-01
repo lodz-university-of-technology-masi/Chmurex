@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router";
 import { Button, FormGroup, FormControl, ControlLabel,  } from "react-bootstrap";
 import "./Login.css";
 import logo from './najlepszeLogo.png';
@@ -17,7 +18,9 @@ export default function Login(props) {
 
     try {
       await Auth.signIn(email, password);
-      alert("Logged in");
+      // alert("Logged in");
+      // return <Redirect push to="/recruiter" />;
+      window.location.assign("/recruiter")
     } catch (e) {
       alert(e.message);
     }
