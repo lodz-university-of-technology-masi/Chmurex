@@ -6,7 +6,7 @@ import Login from "./containers/Login";
 import RecruiterMain from "./containers/RecruiterMain";
 import { Redirect } from "react-router";
 import AppliedRoute from "./components/AppliedRoute";
-
+import CandidateMain from "./containers/CandidateMain";
 
 export default function Routes({ appProps }) {
     return (
@@ -15,6 +15,7 @@ export default function Routes({ appProps }) {
             <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
 
             <Route path="/recruiter" exact component={RecruiterMain} appProps={appProps} />
+            <Route path="/candidate" exact component={CandidateMain} appProps={appProps} />
 
 
             <Route component={NotFound} />

@@ -6,7 +6,7 @@ export default function RecruiterMain(props) {
     return (
         <div className="RecruiterMain">
             <h1>
-                Test
+                Recruiter Placeholder Page
             </h1>
         </div>
     );

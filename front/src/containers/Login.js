@@ -18,13 +18,29 @@ export default function Login(props) {
 
     try {
       await Auth.signIn(email, password);
+      var moveToRecruiter = 0;
       props.userHasAuthenticated(true);
-      props.history.push("/recruiter");
+      Auth.currentAuthenticatedUser()
+          .then(user => Auth.userAttributes(user))
+          .then(attributes => moveToUserHomePage(attributes))
+          .catch(err => alert(err));
+
     } catch (e) {
       alert(e.message);
     }
   }
 
+  function moveToUserHomePage(attributes) {
+    var obj = JSON.parse(attributes[2]);
+    if(obj.Value == 1){
+      props.history.push("/recruiter");
+    }
+    else {
+      props.history.push("/candidate");
+    }
+
+
+  }
   return (
       <div className="Login">
         <form onSubmit={handleSubmit}>

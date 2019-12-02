@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d2f16a8-2edf-4960-9d39-03a4abcc902d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/AppliedRoute.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/CandidateMain.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/RecruiterMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RecruiterMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/najlepszeLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/najlepszeLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +76,7 @@
       <workItem from="1575023557902" duration="28000" />
       <workItem from="1575023588287" duration="6723000" />
       <workItem from="1575225568682" duration="5342000" />
-      <workItem from="1575237315052" duration="15913000" />
+      <workItem from="1575237315052" duration="19201000" />
     </task>
     <servers />
   </component>
