@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d2f16a8-2edf-4960-9d39-03a4abcc902d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/containers/RecruiterMain.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AppliedRoute.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/RecruiterMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RecruiterMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/najlepszeLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/najlepszeLogo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +37,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -43,6 +45,13 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="E:\Program Files (x86)\WebStorm\WebStorm 2019.2.4\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GitRepos\Chmurex\front\src\components" />
+      <recent name="E:\GitRepos\Chmurex\front\src\containers" />
+    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -69,7 +78,7 @@
       <workItem from="1575023557902" duration="28000" />
       <workItem from="1575023588287" duration="6723000" />
       <workItem from="1575225568682" duration="5342000" />
-      <workItem from="1575237315052" duration="1871000" />
+      <workItem from="1575237315052" duration="15913000" />
     </task>
     <servers />
   </component>
@@ -81,9 +90,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="907" y="218" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1575234532988" />
-    <state x="933" y="170" key="FileChooserDialogImpl" timestamp="1575023583574">
+    <state x="777" y="9" key="CommitChangelistDialog2" timestamp="1575300180598">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="933" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1575023583574" />
+    <state x="777" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1575300180598" />
+    <state x="978" y="243" key="FileChooserDialogImpl" timestamp="1575303012452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="978" y="243" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1575303012452" />
+    <state x="815" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1575300126229">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="815" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1575300126229" />
   </component>
 </project>

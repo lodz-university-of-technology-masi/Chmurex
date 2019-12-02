@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 import Amplify from 'aws-amplify';
 import config from './config';
 
+var loginContext
+
 Amplify.configure({
     Auth: {
         mandatorySignIn: true,
