@@ -14,7 +14,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 /**
  * Handler for requests to Lambda function.
  */
-public class App implements RequestHandler<Object, Object> {
+public class HelloApp implements RequestHandler<Object, Object> {
 
     public Object handleRequest(final Object input, final Context context) {
         Map<String, String> headers = new HashMap<>();
@@ -22,7 +22,7 @@ public class App implements RequestHandler<Object, Object> {
         headers.put("X-Custom-Header", "application/json");
         try {
             final String pageContents = this.getPageContents("https://checkip.amazonaws.com");
-            String output = String.format("{ \"message\": \"hello world\", \"location\": \"%s\" }", pageContents);
+            String output = String.format("{ \"message\": \"hello 2 world\", \"location\": \"%s\" }", pageContents);
             return new GatewayResponse(output, headers, 200);
         } catch (IOException e) {
             return new GatewayResponse("{}", headers, 500);

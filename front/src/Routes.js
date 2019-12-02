@@ -7,6 +7,8 @@ import RecruiterMain from "./containers/RecruiterMain";
 import { Redirect } from "react-router";
 import AppliedRoute from "./components/AppliedRoute";
 import CandidateMain from "./containers/CandidateMain";
+import NewTestTemplate from "./containers/NewTestTemplate";
+
 
 export default function Routes({ appProps }) {
     return (
@@ -16,7 +18,7 @@ export default function Routes({ appProps }) {
 
             <Route path="/recruiter" exact component={RecruiterMain} appProps={appProps} />
             <Route path="/candidate" exact component={CandidateMain} appProps={appProps} />
-
+            <Route path="/recruiter/newtesttemplate" exact component={NewTestTemplate} appProps={appProps} />
 
             <Route component={NotFound} />
         </Switch>
