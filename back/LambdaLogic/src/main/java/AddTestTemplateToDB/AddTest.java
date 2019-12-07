@@ -11,20 +11,26 @@ import com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-public class AddTest implements RequestHandler<AddTestRequest, AddTestResponse> {
+import java.util.HashMap;
+import java.util.Map;
+
+public class AddTest implements RequestHandler<AddTestRequest, GatewayResponse> {
 
     private DynamoDB dynamoDb;
     private String DYNAMODB_TABLE_NAME = "TestTemplates";
     private Regions REGION = Regions.US_EAST_1;
 
-    public AddTestResponse handleRequest(AddTestRequest request,Context context)
+    public GatewayResponse handleRequest(AddTestRequest request,Context context)
     {
         this.initDynamoDbClient();
         persistData(request);
 
-        AddTestResponse response = new AddTestResponse();
-        response.setMessage("AUUUUUUUUUUUUUUUUUU");
-        return response;
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        headers.put("X-Custom-Header", "application/json");
+        String output = "Test Template saved successfully";
+
+        return new GatewayResponse(output, headers, 200);
     }
 
     private PutItemOutcome persistData(AddTestRequest request) throws ConditionalCheckFailedException
@@ -32,9 +38,8 @@ public class AddTest implements RequestHandler<AddTestRequest, AddTestResponse> 
         return this.dynamoDb.getTable(DYNAMODB_TABLE_NAME)
                 .putItem(
                 new PutItemSpec().withItem(new Item()
-                        .withPrimaryKey("TestId", "TestoweIDNaStale")
-                        .withString("COOOOO","ELOOOOOOOOO")
- //                       .withList("Questions",request.getQuestions())
+                        .withPrimaryKey("TestId", request.getID())
+                        .withString("Test",request.getJSON())
                 )
                 );
     }

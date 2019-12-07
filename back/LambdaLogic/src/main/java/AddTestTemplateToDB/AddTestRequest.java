@@ -1,55 +1,27 @@
 package AddTestTemplateToDB;
 
-import java.util.List;
 
 public class AddTestRequest {
-    private String testID;
-    private List<Question> questions;
-    public String getTestID() {
-        return testID;
+    private String ID;
+    private String JSON;
+
+    public String getID() {
+        return ID;
     }
 
-    public void setTestID(String testID) {
-        this.testID = testID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public String getJSON() {
+        return JSON;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setJSON(String JSON) {
+        this.JSON = JSON;
     }
-
-    private class Question{
-        private String type;
-        private String text;
-        private List<String> anwsers;
-
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public void setText(String text) {
-            this.text = text;
-        }
-
-        public List<String> getAnwsers() {
-            return anwsers;
-        }
-
-        public void setAnwsers(List<String> anwsers) {
-            this.anwsers = anwsers;
-        }
-    }
-
 }
+
+
+
+
