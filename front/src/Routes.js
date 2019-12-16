@@ -4,13 +4,11 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import RecruiterMain from "./containers/RecruiterMain";
-import { Redirect } from "react-router";
 import AppliedRoute from "./components/AppliedRoute";
 import CandidateMain from "./containers/CandidateMain";
 import NewTestTemplate from "./containers/NewTestTemplate";
 import CandidateProfile from "./containers/CandidateProfile";
 import CandidateTests from "./containers/CandidateTests";
-
 
 export default function Routes({ appProps }) {
     return (
