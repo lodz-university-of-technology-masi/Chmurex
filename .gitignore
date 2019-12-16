@@ -100,3 +100,9 @@ back/LambdaLogic/.idea/
 *.iml
 
 *.zip
+
+*.class
+
+*.jar
+
+back/LambdaLogic/.aws-sam/build/

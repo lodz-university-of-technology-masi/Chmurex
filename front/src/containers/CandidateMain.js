@@ -16,11 +16,14 @@ export default function CandidateMain(props) {
             <h1>
                 Candidate Placeholder Page
             </h1>
-            <Button block bsSize="large"  onClick={viewProfile}>
+            <Button block bsSize="large" onClick={viewProfile}>
                 View your profile details
             </Button>
-            <Button block bsSize="large"  onClick={viewTests}>
+            <Button block bsSize="large" onClick={viewTests}>
                 View your tests
+            </Button>
+            <Button block bsSize="large" onClick={props.history.goBack}>
+                Go Back
             </Button>
         </div>
     );
