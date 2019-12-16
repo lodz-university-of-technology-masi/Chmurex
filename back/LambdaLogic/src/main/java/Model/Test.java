@@ -1,7 +1,7 @@
-package AddTestTemplateToDB;
+package Model;
 
 
-public class AddTestRequest {
+public class Test {
     private String ID;
     private String JSON;
 

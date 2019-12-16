@@ -1,4 +1,4 @@
-package AddTestTemplateToDB;
+package TestTemplateLambdas.GetTestTemplateFromDB;
 
 import java.util.Collections;
 import java.util.HashMap;

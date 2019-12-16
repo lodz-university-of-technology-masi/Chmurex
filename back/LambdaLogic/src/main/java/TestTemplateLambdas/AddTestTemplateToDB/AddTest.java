@@ -1,5 +1,6 @@
-package AddTestTemplateToDB;
+package TestTemplateLambdas.AddTestTemplateToDB;
 
+import Model.Test;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
@@ -14,13 +15,13 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddTest implements RequestHandler<AddTestRequest, GatewayResponse> {
+public class AddTest implements RequestHandler<Test, GatewayResponse> {
 
     private DynamoDB dynamoDb;
     private String DYNAMODB_TABLE_NAME = "TestTemplates";
     private Regions REGION = Regions.US_EAST_1;
 
-    public GatewayResponse handleRequest(AddTestRequest request,Context context)
+    public GatewayResponse handleRequest(Test request, Context context)
     {
         this.initDynamoDbClient();
         persistData(request);
@@ -33,7 +34,7 @@ public class AddTest implements RequestHandler<AddTestRequest, GatewayResponse> 
         return new GatewayResponse(output, headers, 200);
     }
 
-    private PutItemOutcome persistData(AddTestRequest request) throws ConditionalCheckFailedException
+    private PutItemOutcome persistData(Test request) throws ConditionalCheckFailedException
     {
         return this.dynamoDb.getTable(DYNAMODB_TABLE_NAME)
                 .putItem(
