@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/HelloWorldFunction/pom.xml" />
         <option value="$PROJECT_DIR$/NewTestTemplate/HelloWorldFunction/pom.xml" />
+        <option value="$PROJECT_DIR$/LambdaLogic/pom.xml" />
       </list>
     </option>
   </component>

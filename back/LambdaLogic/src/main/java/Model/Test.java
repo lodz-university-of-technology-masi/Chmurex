@@ -1,10 +1,15 @@
 package Model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+@DynamoDBTable(tableName = "TestTemplates")
 public class Test {
     private String ID;
     private String JSON;
 
+    @DynamoDBHashKey(attributeName = "TestId")
     public String getID() {
         return ID;
     }
@@ -13,6 +18,7 @@ public class Test {
         this.ID = ID;
     }
 
+    @DynamoDBAttribute(attributeName = "Test")
     public String getJSON() {
         return JSON;
     }
