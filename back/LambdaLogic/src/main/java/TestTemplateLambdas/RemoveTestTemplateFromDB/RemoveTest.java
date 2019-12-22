@@ -1,4 +1,4 @@
-package TestTemplateLambdas.GetTestTemplateFromDB;
+package TestTemplateLambdas.RemoveTestTemplateFromDB;
 
 import Common.DynamoDBAdapter;
 import Common.GatewayResponse;
@@ -12,8 +12,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class GetTest implements RequestHandler<TestRequest, GatewayResponse> {
+public class RemoveTest implements RequestHandler<TestRequest, GatewayResponse> {
     private String DYNAMODB_TABLE_NAME = "TestTemplates";
     private DynamoDBMapperConfig mapperConfig = DynamoDBMapperConfig.builder()
             .withTableNameOverride(new DynamoDBMapperConfig.TableNameOverride(DYNAMODB_TABLE_NAME))
@@ -22,14 +21,18 @@ public class GetTest implements RequestHandler<TestRequest, GatewayResponse> {
 
     public GatewayResponse handleRequest(TestRequest request, Context context) {
         Test test = mapper.load(Test.class, request.getID());
+
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
         if (test == null) {
-            String output = "Failed";
+            String output = "Test doesn't exist in database";
             return new GatewayResponse(output,headers,404);
         }
-        return new GatewayResponse(test.toString(),headers,200);
+
+        mapper.delete(test);
+        String output = "Test removed successfully";
+        return new GatewayResponse(output,headers,200);
     }
 
 }
