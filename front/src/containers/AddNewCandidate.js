@@ -1,4 +1,5 @@
 import React from "react";
+import { Auth } from "aws-amplify";
 import {Button} from "react-bootstrap";
 import {FormControl, FormGroup, ControlLabel} from "react-bootstrap";
 
@@ -8,33 +9,31 @@ class AddNewCandidate extends React.Component {
         super(props);
         this.state ={
             name: '',
-            email: 'eee',
-            pass: ''
+            email: '',
+            pass: '',
+            newUser:{}
         }
-        this.handleChange.bind(this)
     }
-    
-    handleUserInput (e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({[name]: value});
-      }
-      
-    handleChange(e) {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({[name]: value});
-      }s
 
     validateInput(){
-        return this.state.email.lenght > 0
-    }
+        return this.state.email.lenght > 0 &&
+        this.state.password.lenght > 0
+    };
     
-    handleSubmit = event => {
+    async handleSubmit(event) {
         if (!this.validate()) {
             event.preventDefault()
+            try{
+                const newUser = await Auth.signUp({
+                    username: this.state.email,
+                    password: this.state.password
+                    });
+                    this.state.newUser = newUser;
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
         }
-    };
 
     render() {
         return (
@@ -43,12 +42,20 @@ class AddNewCandidate extends React.Component {
                     Add new candidatee
                 </h1>
                 <form onSubmit={this.handleSubmit}>
-                    <FormGroup controlId="emailadd" bsSize="large">
+                    <FormGroup controlId="email" bsSize="large">
                         <ControlLabel>Email</ControlLabel>
                         <FormControl
                             type="email"
                             value={this.state.email}
                             onChange={(event) => this.setState({ email: this.state.email = event.target.value})}
+                        />
+                    </FormGroup>
+                    <FormGroup controlId="password" bsSize="large">
+                        <ControlLabel>Password</ControlLabel>
+                        <FormControl
+                            type="password"
+                            value={this.state.password}
+                            onChange={(event) => this.setState({ password: this.state.password = event.target.value})}
                         />
                     </FormGroup>
 
@@ -59,7 +66,6 @@ class AddNewCandidate extends React.Component {
             </div>
         );
     }
-
 }
 
 export default AddNewCandidate
