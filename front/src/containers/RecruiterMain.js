@@ -7,6 +7,10 @@ export default function RecruiterMain(props) {
         props.history.push("/recruiter/newtesttemplate");
     }
 
+    function addNewCandidate() {
+        props.history.push("/recruiter/addnewcandidate");
+    }
+
     return (
         <div className="RecruiterMain">
             <h1>
@@ -14,6 +18,9 @@ export default function RecruiterMain(props) {
             </h1>
             <Button block bsSize="large"  onClick={createNewTemplate}>
                 Create new Test template
+            </Button>
+            <Button block bsSize="large"  onClick={addNewCandidate}>
+                Add new candidate
             </Button>
         </div>
     );
