@@ -16,12 +16,12 @@ class AddNewCandidate extends React.Component {
     }
 
     validateInput(){
-        return this.state.email.lenght > 0 &&
-        this.state.password.lenght > 0
+        return this.state.email.length > 0 &&
+        this.state.password.length > 0
     };
     
     async handleSubmit(event) {
-        if (!this.validate()) {
+        if (!this.validateInput()) {
             event.preventDefault()
             try{
                 const newUser = await Auth.signUp({

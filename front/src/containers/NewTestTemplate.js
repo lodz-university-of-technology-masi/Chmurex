@@ -1,63 +1,92 @@
-import React, { useState } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import { API, Logger } from "aws-amplify";
+import React from "react"
 
-export default function NewTestTemplate(props) {
+class NewTestTemplate extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {id: '', json: '', mode: 'open'};
 
-    const [question, setQuestion] = useState("");
-    const options = {
-        // statusCode: 200,
-        headers: {
-            "Content-Type" : "application/json",
-            // "Access-Control-Allow-Headers" : "content-type, origin, accept, credentials, X-API-KEY",
-            "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-            "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+        this.handleChangeMode = this.handleChangeMode.bind(this);
+        this.handleChangeId = this.handleChangeId.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChangeMode(event) {
+        this.setState({mode: event.target.value});
+    }
+
+    handleChangeId(event) {
+        this.setState({id: event.target.value});
+    }
+
+    handleSubmit() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate');
+        xhr.send(JSON.stringify({"ID": this.state.id, "JSON": this.state.json}));
+    }
+
+    renderOpenForm() {
+        if (this.state.mode === 'open') {
+            return (
+                <output>open placeholder</output>
+            );
+        } else {
+            return null;
         }
-        // body: JSON.stringify({ "message": "Hello World!" })
-    };
-
-    function createNewTemplate() {
-        alert("CreateNewTemplateButtonPushed")
-        props.history.push("/recruiter");
     }
 
-    function validateForm() {
-        return question.length > 0;
-    }
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-
-        try {
-            await foo();
-        } catch (e) {
-            alert(e);
+    renderChoiceForm() {
+        if (this.state.mode === 'choice') {
+            return (
+                <output>choice placeholder</output>
+            );
+        } else {
+            return null;
         }
     }
 
-    //TypeError: headers[key].trim is not a function???
-    function foo() {
-        return API.get("chmurex", "/recruiter/newtesttemplate", options);
+    renderNumericForm() {
+        if (this.state.mode === 'numeric') {
+            return (
+                <output>numeric placeholder</output>
+            );
+        } else {
+            return null;
+        }
     }
 
-    return (
-        <div className="NewTestTemplate">
-            <h1>
-                Create Test Placeholder Page
-            </h1>
-            <form onSubmit={handleSubmit}>
-                <FormGroup controlId="question" bsSize="large">
-                    <ControlLabel>Question</ControlLabel>
-                    <FormControl
-                        autoFocus
-                        value={question}
-                        onChange={e => setQuestion(e.target.value)}
-                    />
-                </FormGroup>
-                <Button block bsSize="large" disabled={!validateForm()} type="submit">
-                    Create
-                </Button>
-            </form>
-        </div>
-    );
+    render() {
+        return (
+            <div className="NewTestTemplate">
+                <h1>Create test</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <label>
+                            Test type:
+                            <select value={this.state.mode} onChange={this.handleChangeMode}>
+                                <option value='open'>Open</option>
+                                <option value='choice'>Choice</option>
+                                <option value='numeric'>Numeric</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Test ID:
+                            <input type="text" value={this.state.id} onChange={this.handleChangeId}/>
+                        </label>
+                    </div>
+                    <div>
+                        {this.renderOpenForm()}
+                        {this.renderChoiceForm()}
+                        {this.renderNumericForm()}
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        );
+    }
 }
+
+export default NewTestTemplate
