@@ -32,7 +32,7 @@ export default function Login(props) {
 
   function moveToUserHomePage(attributes) {
     var obj = JSON.parse(attributes[2]);
-    if(obj.Value == 1){
+    if(obj.Value === 1){
       props.history.push("/recruiter");
     }
     else {
