@@ -18,14 +18,14 @@ public class GetAllCandidates implements RequestHandler<Object, GatewayResponse>
 
     public GatewayResponse handleRequest(Object o, Context context) {
         ListUsersResult users = cognito.listUsers(new ListUsersRequest().withUserPoolId("us-east-1_Cb75QZCzu"));
-        Map<String,String> map = new HashMap<>();
+        Map<String, Map<String, String>> map = new HashMap<>();
         List<UserType> candidates = users.getUsers();
         int i = 0;
-        for (UserType user: candidates
-             ) {
-            String s = UserTypeConvert(user);
-            if(s.contains("isRecruiter:0")) {
-                map.put(Integer.toString(i),s);
+        for (UserType user : candidates
+        ) {
+            Map<String, String> attributes = UserTypeConvert(user);
+            if (attributes.get("custom:isRecruiter").equals("0")) {
+                map.put(Integer.toString(i), attributes);
                 i++;
             }
         }
@@ -33,19 +33,14 @@ public class GetAllCandidates implements RequestHandler<Object, GatewayResponse>
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
-        return new GatewayResponse(json.toString(),headers ,200);
+        return new GatewayResponse(json.toString(), headers, 200);
     }
 
-    private String UserTypeConvert(UserType userType)
-    {
-        StringBuilder sb = new StringBuilder();
+    private Map<String, String> UserTypeConvert(UserType userType) {
+        Map<String, String> map = new HashMap<>();
         for (AttributeType attribute : userType.getAttributes()) {
-            sb.append(attribute.getName());
-            sb.append(":");
-            sb.append(attribute.getValue());
-            sb.append(";");
+            map.put(attribute.getName(), attribute.getValue());
         }
-        String user = sb.toString();
-        return user.substring(0,user.length()-1);
+        return map;
     }
 }

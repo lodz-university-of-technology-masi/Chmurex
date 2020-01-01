@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bit/react-bootstrap.react-bootstrap.dropdown-button": "^1.0.0",
     "aws-amplify": "^1.2.4",
     "core-js": "^3.6.0",
     "react": "^16.12.0",
