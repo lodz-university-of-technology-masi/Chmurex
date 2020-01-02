@@ -10,7 +10,9 @@ class NewTestTemplate extends React.Component {
         this.handleChangeType = this.handleChangeType.bind(this);
         this.handleChangeText = this.handleChangeText.bind(this);
         this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
-        this.handleIncrease = this.handleIncrease.bind(this);
+        this.handleChangeMultipleAnswer = this.handleChangeMultipleAnswer.bind(this);
+        this.handleAddQuestion = this.handleAddQuestion.bind(this);
+        this.handleAddAnswer = this.handleAddAnswer.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -19,9 +21,15 @@ class NewTestTemplate extends React.Component {
     }
 
     handleChangeType(event, i) {
-        let temp = [...this.state.types];
-        temp[i] = event.target.value;
-        this.setState({types: temp});
+        let tempTypes = [...this.state.types];
+        tempTypes[i] = event.target.value;
+        this.setState({types: tempTypes});
+
+        let tempAnswers = [...this.state.answers];
+        if (Array.isArray(tempAnswers[i])) {
+            tempAnswers[i] = "";
+            this.setState({answers: tempAnswers});
+        }
     }
 
     handleChangeText(event, i) {
@@ -36,13 +44,13 @@ class NewTestTemplate extends React.Component {
         this.setState({answers: temp});
     }
 
-    handleChangeMultipleAnswer(event, i) {
+    handleChangeMultipleAnswer(event, i, j) {
         let temp = [...this.state.answers];
-        temp[i] = [event.target.value];
+        temp[i][j] = event.target.value;
         this.setState({answers: temp});
     }
 
-    handleIncrease() {
+    handleAddQuestion() {
         let tempTypes = [...this.state.types];
         tempTypes.push("open");
         this.setState({types: tempTypes});
@@ -52,10 +60,20 @@ class NewTestTemplate extends React.Component {
         this.setState({texts: tempTexts});
 
         let tempAnswers = [...this.state.answers];
-        tempAnswers.push("");
+        tempAnswers.push([""]);
         this.setState({answers: tempAnswers});
 
         this.setState({count: this.state.count + 1});
+    }
+
+    handleAddAnswer(i) {
+        let tempAnswers = [...this.state.answers];
+        if (Array.isArray(tempAnswers[i])) {
+            tempAnswers[i].push("");
+        } else {
+            tempAnswers[i] = [""];
+        }
+        this.setState({answers: tempAnswers});
     }
 
     handleSubmit(event) {
@@ -77,10 +95,8 @@ class NewTestTemplate extends React.Component {
             }
         };
         xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate");
-        // xhr.send(JSON.stringify({"ID": this.state.id, "JSON": this.state.json}));
-        console.log(JSON.stringify(contents, null, 4));
-        // console.log(this.state.types);
-        this.setState({id: "", json: ""});
+        xhr.send(JSON.stringify({"ID": this.state.id, "JSON": JSON.stringify(contents, null, 4)}));
+        this.setState({count: 0, id: "", types: [], texts: [], answers: []});
     }
 
     renderForm() {
@@ -101,7 +117,7 @@ class NewTestTemplate extends React.Component {
                         <FormControl type="text" value={this.state.texts[i]} onChange={(event) => this.handleChangeText(event, i)}/>
                     </FormGroup>
                     {this.renderAnswer(i)}
-                    <hr style={{color: "pink", backgroundColor: "black", height: 2}}/>
+                    <hr style={{color: "black", backgroundColor: "black", height: 2}}/>
                 </div>
             );
         }
@@ -126,11 +142,24 @@ class NewTestTemplate extends React.Component {
                 );
             case "choice":
                 let answers = [];
-                return (
-                    <FormGroup bsSize="large">
-                        <ControlLabel>Answer {i + 1}</ControlLabel>
-                    </FormGroup>
+                for (let j = 0; j < this.state.answers[i].length; j++) {
+                    answers.push(
+                        <div key={i + " " + j}>
+                            <FormGroup bsSize="large">
+                                <ControlLabel>Answer {i + 1}.{j + 1}</ControlLabel>
+                                <FormControl type="text" value={this.state.answers[i][j]} onChange={(event) => this.handleChangeMultipleAnswer(event, i, j)}/>
+                            </FormGroup>
+                        </div>
+                    );
+                }
+                answers.push(
+                    <div key={this.state.answers[i].length + 1}>
+                        <Button block bsSize="large" onClick={() => this.handleAddAnswer(i)}>
+                            New answer
+                        </Button>
+                    </div>
                 );
+                return answers;
             default:
                 break;
         }
@@ -146,7 +175,7 @@ class NewTestTemplate extends React.Component {
                         <FormControl type="text" value={this.state.id} onChange={this.handleChangeId}/>
                     </FormGroup>
                     {this.renderForm()}
-                    <Button block bsSize="large" onClick={this.handleIncrease}>
+                    <Button block bsSize="large" onClick={this.handleAddQuestion}>
                         New question
                     </Button>
                     <Button block bsSize="large" type="submit">
