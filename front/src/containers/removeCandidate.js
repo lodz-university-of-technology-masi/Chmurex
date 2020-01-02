@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Button} from "react-bootstrap";
 import "./listCandidates.css"
 class RemoveCandidate extends React.Component{
     constructor(props) {
@@ -8,9 +8,12 @@ class RemoveCandidate extends React.Component{
     render() {
         return (
             <div className="removeCandidate">
-               <p>
-                    Czy na pewno chcesz usunąć {this.props.location.state.clickedUser} ?
-               </p>
+               <h1>
+                    Are you sure you want to remove {this.props.location.state.sub} {this.props.location.state.email} ?
+               </h1>
+               <Button type="button">
+                    Remove
+               </Button>
             </div>
             );
     }

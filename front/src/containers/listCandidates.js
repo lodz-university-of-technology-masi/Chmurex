@@ -35,7 +35,7 @@ class ListCandidates extends React.Component{
                                 <td>{ this.state.users[key].email }</td>
                                 <td>
                                     <Button type="button" onClick={() => {
-                                        this.removeCandidate(this.state.users[key].sub);
+                                        this.removeCandidate(this.state.users[key].sub, this.state.users[key].email);
                                     }
                                         }>
                                         Remove
@@ -51,11 +51,12 @@ class ListCandidates extends React.Component{
             );
     }
 
-    removeCandidate = (sub) => {
+    removeCandidate = (sub,email) => {
         console.log("remove " + sub);
         this.props.history.push({
             pathname: "/recruiter/listCandidates/removeCandidate",
-            state: { clickedUser: sub }
+            state: { sub: sub, 
+                email: email}
           });
         console.log(this.clickedUser)
 
