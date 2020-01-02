@@ -106,5 +106,3 @@ back/LambdaLogic/.idea/
 *.jar
 
 back/LambdaLogic/.aws-sam/build/
-
-push.sh
