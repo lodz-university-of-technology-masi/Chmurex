@@ -8,40 +8,33 @@ class AddNewCandidate extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
-            name: '',
             email: '',
-            pass: '',
+            password: '',
             newUser:{}
         }
     }
 
     validateInput(){
         return this.state.email.length > 0 &&
-        this.state.password.length > 0
+        this.state.password.length > 6
     };
     
-    async handleSubmit(event) {
-        if (!this.validateInput()) {
-            event.preventDefault()
-            try{
-                const newUser = await Auth.signUp({
-                    username: this.state.email,
-                    password: this.state.password
-                    });
-                    this.state.newUser = newUser;
-                } catch (e) {
-                    alert(e.message);
-                }
-            }
-        }
+    handleSubmit() {
+        let xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/addcandidate",true);
+            xhr.onload = function () {
+                console.log("dodawanko");
+            };
+            xhr.send('{"email":"'+ this.state.email+'","password":"'+this.state.password+'"}');
+    }
 
     render() {
         return (
             <div className="AddNewCandidate">
                 <h1>
-                    Add new candidatee
+                    Add new candidate
                 </h1>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <FormGroup controlId="email" bsSize="large">
                         <ControlLabel>Email</ControlLabel>
                         <FormControl
@@ -59,7 +52,10 @@ class AddNewCandidate extends React.Component {
                         />
                     </FormGroup>
 
-                    <Button block bsSize="large" type="submit">
+                    <Button block bsSize="large" disabled={!this.validateInput()} type="button" onClick={() => {
+                                        this.handleSubmit();
+                                    }
+                                        }>
                         Submit
                     </Button>
                 </form>
