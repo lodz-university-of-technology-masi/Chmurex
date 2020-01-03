@@ -9,13 +9,19 @@ class RemoveCandidate extends React.Component{
         return (
             <div className="removeCandidate">
                <h1>
-                    Are you sure you want to remove {this.props.location.state.sub} {this.props.location.state.email} ?
+                    Are you sure you want to remove {this.props.location.state.email} {this.props.location.state.email} ?
                </h1>
                <Button type="button"  onClick={() => {
                                         this.handleRemove(this.props.location.state.email);
                                     }
                                         }>
                     Remove
+               </Button>
+               <Button type="button"  onClick={() => {
+                                        this.goBack();
+                                    }
+                                        }>
+                    Cancel
                </Button>
             </div>
             );
@@ -28,6 +34,11 @@ class RemoveCandidate extends React.Component{
             console.log("usuwankoo");
         };
         xhr.send('{"user":"'+ user +'"}');
+        this.goBack();
+    }
+
+    goBack(){
+        this.props.history.push("/recruiter/listCandidates");
     }
 }
     

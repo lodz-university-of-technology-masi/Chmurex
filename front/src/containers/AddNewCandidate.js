@@ -2,7 +2,6 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import {Button} from "react-bootstrap";
 import {FormControl, FormGroup, ControlLabel} from "react-bootstrap";
-
 class AddNewCandidate extends React.Component {
 
     constructor(props) {
@@ -20,12 +19,19 @@ class AddNewCandidate extends React.Component {
     };
     
     handleSubmit() {
+        this.setState({email: ''});
+        this.setState({password: ''});
+
         let xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/addcandidate",true);
-            xhr.onload = function () {
-                console.log("dodawanko");
-            };
-            xhr.send('{"email":"'+ this.state.email+'","password":"'+this.state.password+'"}');
+        xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/addcandidate",true);
+        xhr.onload = function () {
+            console.log("dodawanko");
+        };
+        xhr.send('{"email":"'+ this.state.email+'","password":"'+this.state.password+'"}')
+    }
+
+    goBack(){
+        this.props.history.push("/recruiter")
     }
 
     render() {
@@ -58,7 +64,14 @@ class AddNewCandidate extends React.Component {
                                         }>
                         Submit
                     </Button>
+                    <Button block bsSize="large" type="button" onClick={() => {
+                        this.goBack();
+                    }
+                    }>
+                        Go Back
+                    </Button>
                 </form>
+
             </div>
         );
     }
