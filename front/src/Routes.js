@@ -12,6 +12,7 @@ import CandidateTests from "./containers/CandidateTests";
 import AddNewCandidate from "./containers/AddNewCandidate"
 import ListCandidates from "./containers/listCandidates"
 import RemoveCandidate from "./containers/removeCandidate"
+import ListTests from "./containers/ListTests";
 
 export default function Routes({ appProps }) {
     return (
@@ -21,7 +22,8 @@ export default function Routes({ appProps }) {
 
             <Route path="/recruiter" exact component={RecruiterMain} appProps={appProps} />
             <Route path="/recruiter/addnewcandidate" exact component={AddNewCandidate} appProps={appProps} />
-            <Route path="/recruiter/newtesttemplate" exact component={NewTestTemplate} appProps={appProps} />
+            <Route path="/recruiter/tests" exact component={ListTests} appProps={appProps} />
+            <Route path="/recruiter/tests/newtesttemplate" exact component={NewTestTemplate} appProps={appProps} />
             <Route path="/candidate" exact component={CandidateMain} appProps={appProps} />
             <Route path="/candidate/profile" exact component={CandidateProfile} appProps={appProps} />
             <Route path="/candidate/tests" exact component={CandidateTests} appProps={appProps} />

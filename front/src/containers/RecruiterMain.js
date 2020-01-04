@@ -3,15 +3,14 @@ import { Button } from "react-bootstrap"
 
 export default function RecruiterMain(props) {
 
-    function createNewTemplate() {
-        props.history.push("/recruiter/newtesttemplate");
+    function tests() {
+        props.history.push("recruiter/tests");
     }
 
     function addNewCandidate() {
         props.history.push("/recruiter/addnewcandidate");
     }
 
-    
     function listCandidates() {
         props.history.push("/recruiter/listCandidates");
     }
@@ -21,8 +20,8 @@ export default function RecruiterMain(props) {
             <h1>
                 Recruiter Placeholder Page
             </h1>
-            <Button block bsSize="large"  onClick={createNewTemplate}>
-                Create new Test template
+            <Button block bsSize="large"  onClick={tests}>
+                Tests
             </Button>
             <Button block bsSize="large"  onClick={addNewCandidate}>
                 Add new candidate

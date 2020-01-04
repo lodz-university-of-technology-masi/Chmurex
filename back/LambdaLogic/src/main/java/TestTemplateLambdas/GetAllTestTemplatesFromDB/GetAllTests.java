@@ -29,6 +29,6 @@ public class GetAllTests implements RequestHandler<List<TestRequest>, GatewayRes
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
-        return new GatewayResponse(json.toString(), headers, 200);
+        return new GatewayResponse(json.toString().replace("\\", ""), headers, 200);
     }
 }

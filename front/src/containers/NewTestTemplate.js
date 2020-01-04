@@ -147,8 +147,8 @@ class NewTestTemplate extends React.Component {
                     alert("Successfully saved new test template");
                 }
             };
-            xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate");
-            xhr.send(JSON.stringify({"ID": this.state.id + this.state.language, "JSON": JSON.stringify(contents, null, 4)}));
+            xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate", true);
+            xhr.send(JSON.stringify({"ID": this.state.id + this.state.language, "JSON": JSON.stringify(contents)}));
             this.setState({count: 0, id: "", language: "EN", types: [], texts: [], answers: []});
         }
     }
@@ -257,6 +257,9 @@ class NewTestTemplate extends React.Component {
                     </FormGroup>
                     <hr style={{backgroundColor: "#333333", height: 2}}/>
                     {this.renderForm()}
+                    <Button onClick={this.props.history.goBack} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
+                        Back
+                    </Button>
                     <Button onClick={() => this.handleAddQuestion()} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
                         New question
                     </Button>
