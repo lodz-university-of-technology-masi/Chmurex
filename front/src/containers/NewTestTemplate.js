@@ -142,7 +142,7 @@ class NewTestTemplate extends React.Component {
                 });
             }
             let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     alert("Successfully saved new test template");
                 }
