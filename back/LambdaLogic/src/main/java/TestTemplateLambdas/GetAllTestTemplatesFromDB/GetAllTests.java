@@ -9,7 +9,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,10 +25,14 @@ public class GetAllTests implements RequestHandler<List<TestRequest>, GatewayRes
     @Override
     public GatewayResponse handleRequest(List<TestRequest> testRequests, Context context) {
         List<Test> tests = mapper.scan(Test.class, new DynamoDBScanExpression());
-        JSONArray json = new JSONArray(tests);
+        JSONObject json = new JSONObject();
+        json.append("tests", tests);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
-        return new GatewayResponse(json.toString().replace("\\", ""), headers, 200);
+        return new GatewayResponse(json.toString()
+                .replace("\\", "")
+                .replace("[[", "[")
+                .replace("]]", "]"), headers, 200);
     }
 }

@@ -11,8 +11,8 @@ class ListTests extends React.Component {
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(event) {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                let tests = JSON.parse(xhr.responseText).body;
-                console.log(tests);
+                let json = JSON.parse(xhr.responseText);
+                console.log(json.body);
             }
         };
         xhr.open("GET", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/gettesttemplates"/*, true*/);
