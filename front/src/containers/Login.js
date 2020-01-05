@@ -23,6 +23,7 @@ export default function Login(props) {
       Auth.currentAuthenticatedUser()
           .then(user => Auth.userAttributes(user))
           .then(attributes => moveToUserHomePage(attributes))
+          .then(attributes => console.log(attributes))
           .catch(err => alert(err));
 
     } catch (e) {
@@ -31,11 +32,13 @@ export default function Login(props) {
   }
 
   function moveToUserHomePage(attributes) {
-    var obj = JSON.parse(attributes[2]);
-    if(obj.Value === 1){
+    let val  = attributes[2].getValue();
+    if(val === "1"){
+      console.log("Going to recruiter main");
       props.history.push("/recruiter");
     }
     else {
+      console.log("Going to candidate main");
       props.history.push("/candidate");
     }
 
