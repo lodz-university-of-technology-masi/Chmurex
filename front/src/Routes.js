@@ -12,7 +12,7 @@ import CandidateTests from "./containers/CandidateTests";
 import AddNewCandidate from "./containers/AddNewCandidate"
 import ListCandidates from "./containers/listCandidates"
 import RemoveCandidate from "./containers/removeCandidate"
-
+import CsvImport from "./containers/csvImport"
 export default function Routes({ appProps }) {
     return (
         <Switch>
@@ -20,6 +20,7 @@ export default function Routes({ appProps }) {
             <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
 
             <Route path="/recruiter" exact component={RecruiterMain} appProps={appProps} />
+            <Route path="/recruiter/csvimport" exact component={CsvImport} appProps={appProps} />
             <Route path="/recruiter/addnewcandidate" exact component={AddNewCandidate} appProps={appProps} />
             <Route path="/recruiter/newtesttemplate" exact component={NewTestTemplate} appProps={appProps} />
             <Route path="/candidate" exact component={CandidateMain} appProps={appProps} />
