@@ -9,12 +9,13 @@ class ListTests extends React.Component {
 
     getTests() {
         let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(event) {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                let json = JSON.parse(xhr.responseText);
-                console.log(json.body);
+                let body = JSON.parse(xhr.responseText).body;
+                this.setState({tests: JSON.parse(body).tests});
+                // console.log(this.state.tests);
             }
-        };
+        }.bind(this);
         xhr.open("GET", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/gettesttemplates"/*, true*/);
         xhr.send();
     }
@@ -29,6 +30,16 @@ class ListTests extends React.Component {
                 <h1>
                     Test list
                 </h1>
+                <table>
+                    <thead>
+                        <tr>Test name</tr>
+                        <tr>Update</tr>
+                        <tr>Delete</tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
                 <Button onClick={() => this.getTests()}>
                     Print tests in console
                 </Button>
