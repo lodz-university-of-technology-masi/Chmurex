@@ -16,6 +16,10 @@ export default function RecruiterMain(props) {
         props.history.push("/recruiter/listCandidates");
     }
 
+    function csvImport() {
+        props.history.push("/recruiter/csvImport");
+    }
+
     return (
         <div className="RecruiterMain">
             <h1>
@@ -23,6 +27,9 @@ export default function RecruiterMain(props) {
             </h1>
             <Button block bsSize="large"  onClick={createNewTemplate}>
                 Create new Test template
+            </Button>
+            <Button block bsSize="large"  onClick={csvImport}>
+               Csv import test template
             </Button>
             <Button block bsSize="large"  onClick={addNewCandidate}>
                 Add new candidate
