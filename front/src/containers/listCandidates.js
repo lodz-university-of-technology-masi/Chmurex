@@ -23,6 +23,7 @@ class ListCandidates extends React.Component{
                         <tr>
                             <th>ID</th>
                             <th>Email</th>
+                            <th>Assign test</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
@@ -33,6 +34,13 @@ class ListCandidates extends React.Component{
                             <tr>
                                 <td>{ this.state.users[key].sub }</td>
                                 <td>{ this.state.users[key].email }</td>
+                                <td>
+                                    <Button type="button" onClick={() => {
+                                        this.assignTests(this.state.users[key].sub, this.state.users[key].email);
+                                }
+                                    }>
+                                    Assign
+                                </Button></td>
                                 <td>
                                     <Button type="button" onClick={() => {
                                         this.removeCandidate(this.state.users[key].sub, this.state.users[key].email);
@@ -59,8 +67,16 @@ class ListCandidates extends React.Component{
                 email: email}
           });
         console.log(this.clickedUser)
-
     };
+
+    assignTests = (sub,email) => {
+        console.log("assign tests to " + sub);
+        this.props.history.push({
+            pathname: "/recruiter/listCandidates/assignTestsToCandidate",
+            state: { sub: sub,
+                email: email}
+        })
+    }
 
     componentDidMount(){
         this.getCandidates(this.setUsers,this.setCompleted);
