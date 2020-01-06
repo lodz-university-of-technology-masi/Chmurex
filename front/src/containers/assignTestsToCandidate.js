@@ -7,7 +7,9 @@ class AssignTestsToCandidate extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            assignedTests: JSON.parse('{\"tests\":[{\"test\":{\"testID\":\"temp\",\"finished\":true}},{\"test\":{\"testID\":\"temp\",\"finished\":false}}]}')
+            assignedTests: JSON.parse('{\"tests\":[{\"test\":{\"testID\":\"temp\",\"finished\":true}}]}'),
+            mainMessage: "loading",
+            testsToAssign: JSON.parse('{\"tests\":[{\"test\":{\"testID\":\"temp\",\"finished\":true}}]}')
         }
     }
 
@@ -17,8 +19,7 @@ class AssignTestsToCandidate extends React.Component{
                 <h1>
                     This is the page to assign test to candidate { this.props.location.state.email}!
                 </h1>
-                <h2>This is the list of all his assignments:</h2>
-                <h2>{this.state.assignedTests.tests[0].test.testID }</h2>
+                <h2>{this.state.mainMessage}</h2>
                 <table className="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -39,14 +40,17 @@ class AssignTestsToCandidate extends React.Component{
                     }
                     </tbody>
                 </table>
+                <h2>
+                    Tests that can be assigned
+                </h2>
             </div>
         );
     }
 
     componentDidMount(){
-        this.getAssignmentTable(this.setAssignedTests);
+        this.getAssignmentTable(this.setAssignedTests, this.setMainMessage);
     }
-    getAssignmentTable = (callback1) => {
+    getAssignmentTable = (callback1, callback2) => {
         let req = new XMLHttpRequest();
         let self = this;
         req.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/getassignmenttable",true);
@@ -59,6 +63,7 @@ class AssignTestsToCandidate extends React.Component{
                   console.log("2" + obj);
                   let assignmentObject = JSON.parse(obj.body);
                   callback1.call(self, assignmentObject);
+                  callback2.call(self, "This is the list of all his assignments:")
               }
               else {
                   console.log("Blad podczas pobierania przypisan kandydata")
@@ -70,6 +75,10 @@ class AssignTestsToCandidate extends React.Component{
 
     setAssignedTests(assignments){
         this.setState({assignedTests: assignments} );
+    }
+
+    setMainMessage(message){
+        this.setState({mainMessage: message} );
     }
 }
 
