@@ -5,6 +5,8 @@ class ListTests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {tests: []};
+
+        this.getTests();
     }
 
     getTests() {
@@ -13,15 +15,36 @@ class ListTests extends React.Component {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let body = JSON.parse(xhr.responseText).body;
                 this.setState({tests: JSON.parse(body).tests});
-                // console.log(this.state.tests);
             }
         }.bind(this);
-        xhr.open("GET", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/gettesttemplates"/*, true*/);
+        xhr.open("GET", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/gettesttemplates", true);
         xhr.send();
     }
 
     createNewTest() {
         this.props.history.push("/recruiter/tests/newtesttemplate");
+    }
+
+    renderTable() {
+        let rows = [];
+        for (let i = 0; i < this.state.tests.length; i++) {
+            rows.push(
+                <tr key={i}>
+                    <td>{this.state.tests[i]}</td>
+                    <td>
+                        <Button>
+                            Update
+                        </Button>
+                    </td>
+                    <td>
+                        <Button>
+                            Delete
+                        </Button>
+                    </td>
+                </tr>
+            )
+        }
+        return rows;
     }
 
     render() {
@@ -30,18 +53,20 @@ class ListTests extends React.Component {
                 <h1>
                     Test list
                 </h1>
-                <table>
+                <table className="table table-bordered table-hover">
                     <thead>
-                        <tr>Test name</tr>
-                        <tr>Update</tr>
-                        <tr>Delete</tr>
+                        <tr>
+                            <th>Test name</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
                     </thead>
                     <tbody>
-
+                        {this.renderTable()}
                     </tbody>
                 </table>
-                <Button onClick={() => this.getTests()}>
-                    Print tests in console
+                <Button onClick={this.props.history.goBack}>
+                    Back
                 </Button>
                 <Button onClick={() => this.createNewTest()}>
                     Create a new test
