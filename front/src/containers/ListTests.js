@@ -21,6 +21,23 @@ class ListTests extends React.Component {
         xhr.send();
     }
 
+    handleUpdateTest(i) {
+        console.log(this.state.tests[i]);
+    }
+
+    handleDeleteTest(i) {
+        let xhr = new XMLHttpRequest();
+        let self = this;
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                self.getTests();
+                alert("Successfully deleted test template");
+            }
+        };
+        xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/removetesttemplate", true);
+        xhr.send(JSON.stringify({"ID": this.state.tests[i]}));
+    }
+
     createNewTest() {
         this.props.history.push("/recruiter/tests/newtesttemplate");
     }
@@ -32,12 +49,12 @@ class ListTests extends React.Component {
                 <tr key={i}>
                     <td>{this.state.tests[i]}</td>
                     <td>
-                        <Button>
+                        <Button onClick={() => this.handleUpdateTest(i)}>
                             Update
                         </Button>
                     </td>
                     <td>
-                        <Button>
+                        <Button onClick={() => this.handleDeleteTest(i)}>
                             Delete
                         </Button>
                     </td>
