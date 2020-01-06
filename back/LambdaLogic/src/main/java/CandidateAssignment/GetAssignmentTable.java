@@ -32,9 +32,9 @@ public class GetAssignmentTable implements RequestHandler<GetAssignmentTableRequ
             createdAT.setID(userEmail);
             createdAT.setJSON("{\"tests\":[]}");
             mapper.save(createdAT);
-            return new GatewayResponse(createdAT.toString(), headers, 200);
+            return new GatewayResponse(createdAT.getJSON(), headers, 200);
         }
 
-        return new GatewayResponse(assignmentTable.toString(), headers, 200);
+        return new GatewayResponse(assignmentTable.getJSON(), headers, 200);
     }
 }
