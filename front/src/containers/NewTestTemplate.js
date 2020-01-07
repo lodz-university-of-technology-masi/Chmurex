@@ -4,7 +4,14 @@ import { Button, Form, FormControl, FormGroup, InputGroup } from "react-bootstra
 class NewTestTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {count: 0, id: "", language: "EN", types: [], texts: [], answers: []};
+        this.state = {
+            id: "",
+            count: 0,
+            language: "EN",
+            types: [],
+            texts: [],
+            answers: []
+        };
     }
 
     handleChangeId(event) {

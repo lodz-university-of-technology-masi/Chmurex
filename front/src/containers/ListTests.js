@@ -22,7 +22,7 @@ class ListTests extends React.Component {
     }
 
     handleUpdateTest(i) {
-        console.log(this.state.tests[i]);
+        this.props.history.push("/recruiter/tests/updatetest?id=" + this.state.tests[i]);
     }
 
     handleDeleteTest(i) {
@@ -67,9 +67,7 @@ class ListTests extends React.Component {
     render() {
         return (
             <div className="ListTests">
-                <h1>
-                    Test list
-                </h1>
+                <h1>Test list</h1>
                 <table className="table table-bordered table-hover">
                     <thead>
                         <tr>
