@@ -4,7 +4,14 @@ import { Button, Form, FormControl, FormGroup, InputGroup } from "react-bootstra
 class NewTestTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {count: 0, id: "", language: "EN", types: [], texts: [], answers: []};
+        this.state = {
+            id: "",
+            count: 0,
+            language: "EN",
+            types: [],
+            texts: [],
+            answers: []
+        };
     }
 
     handleChangeId(event) {
@@ -142,13 +149,13 @@ class NewTestTemplate extends React.Component {
                 });
             }
             let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     alert("Successfully saved new test template");
                 }
             };
-            xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate");
-            xhr.send(JSON.stringify({"ID": this.state.id + this.state.language, "JSON": JSON.stringify(contents, null, 4)}));
+            xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate", true);
+            xhr.send(JSON.stringify({"ID": this.state.id + this.state.language, "JSON": JSON.stringify(contents)}));
             this.setState({count: 0, id: "", language: "EN", types: [], texts: [], answers: []});
         }
     }
@@ -257,6 +264,9 @@ class NewTestTemplate extends React.Component {
                     </FormGroup>
                     <hr style={{backgroundColor: "#333333", height: 2}}/>
                     {this.renderForm()}
+                    <Button onClick={this.props.history.goBack} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
+                        Back
+                    </Button>
                     <Button onClick={() => this.handleAddQuestion()} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
                         New question
                     </Button>

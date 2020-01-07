@@ -94,7 +94,7 @@ class ListCandidates extends React.Component{
         let req = new XMLHttpRequest();
         var self = this;
         req.open('GET', 'https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/getcandidates', true);
-        req.onreadystatechange = function () {
+        req.onreadystatechange = function() {
             if (req.readyState === 4) {
                 if(req.status === 200){
                     let text = req.responseText;
