@@ -8,7 +8,7 @@ export default function CandidateMain(props) {
     }
 
     function viewTests() {
-        props.history.push("/recruiter/tests");
+        props.history.push("/candidate/tests");
     }
 
     return (
