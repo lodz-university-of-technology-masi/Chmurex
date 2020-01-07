@@ -6,8 +6,8 @@ class NewTestTemplate extends React.Component {
         super(props);
         this.state = {
             id: "",
-            count: 0,
             language: "EN",
+            count: 0,
             types: [],
             texts: [],
             answers: []
