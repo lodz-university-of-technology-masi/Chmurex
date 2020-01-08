@@ -14,6 +14,7 @@ import ListCandidates from "./containers/listCandidates"
 import RemoveCandidate from "./containers/removeCandidate"
 import AssignTestsToCandidate from "./containers/assignTestsToCandidate"
 import CsvImport from "./containers/csvImport"
+import FillOutTest from "./containers/FillOutTest";
 
 export default function Routes({ appProps }) {
     return (
@@ -31,6 +32,7 @@ export default function Routes({ appProps }) {
             <Route path="/recruiter/listCandidates" exact component={ListCandidates} appProps={appProps} />
             <Route path="/recruiter/listCandidates/removeCandidate" exact component={RemoveCandidate} appProps={appProps}/>
             <Route path="/recruiter/listCandidates/assignTestsToCandidate" exact component={AssignTestsToCandidate} appProps={appProps}/>
+            <Route path="/candidate/tests/fillOutTest" exact component={FillOutTest} appProps={appProps}/>
             <Route component={NotFound} />
         </Switch>
     );

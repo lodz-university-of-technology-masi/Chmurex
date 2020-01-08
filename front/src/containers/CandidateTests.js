@@ -53,8 +53,9 @@ class CandidateTests extends React.Component{
                                         <tr key={"sectablerow" + key}>
                                             <td key={this.state.assignedTests.tests[key] + "1"}>{ this.state.assignedTests.tests[key].test.testID }</td>
                                             <td key={this.state.assignedTests.tests[key] + "2"}>
-                                                <Button type="button" >
-                                                    { this.state.assignedTests.tests[key].test.finished.toString() }
+                                                <Button type="button" onClick={() => { this.fillOutTest(this.state.assignedTests.tests[key].test.testID ,this.state.email)}
+                                                }>
+                                                    Fill out
                                                 </Button>
                                             </td>
                                         </tr>
@@ -101,12 +102,20 @@ class CandidateTests extends React.Component{
         };
         console.log(this.state.email);
         req.send('{"ID":"'+ this.state.email +'"}');
-    }
+    };
+
+    fillOutTest = (test, email) => {
+        console.log("fill out test: " + test);
+        this.props.history.push({
+            pathname: "/candidate/tests/fillOutTest",
+            state: { testID: test,
+                email: email}
+        })
+    };
+
+
 
 }
-
-
-
 
 
 export default CandidateTests;
