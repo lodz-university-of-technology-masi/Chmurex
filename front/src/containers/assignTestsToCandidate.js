@@ -105,7 +105,7 @@ class AssignTestsToCandidate extends React.Component{
           }
         };
         req.send('{"ID":"'+ this.props.location.state.email +'"}');
-    }
+    };
 
     setAssignedTests(assignments){ this.setState({assignedTests: assignments} ); }
 
