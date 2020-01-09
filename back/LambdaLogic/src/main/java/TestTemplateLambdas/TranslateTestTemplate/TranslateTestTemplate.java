@@ -18,7 +18,6 @@ import com.amazonaws.services.translate.model.TranslateTextResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,11 +47,12 @@ public class TranslateTestTemplate implements RequestHandler<TestRequest, Gatewa
         JSONObject translatedQuestions = new JSONObject();
         JSONObject questions = (JSONObject) jsonObject.get("Questions"+request.getID());
         JSONArray questionsArray = (JSONArray) questions.get("questions");
+        JSONArray translatedQuestionsArray = new JSONArray();
+        JSONObject translatedQuestionsArrayRoot = new JSONObject();
         StringBuilder sb = new StringBuilder();
         String returned = new String("");
         for(int i=0;i<questionsArray.length();i++)
         {
-
             JSONObject question = (JSONObject) questionsArray.getJSONObject(i).get("question");
             String text = question.getString("text");
             JSONArray answers = question.getJSONArray("answers");
@@ -69,8 +69,6 @@ public class TranslateTestTemplate implements RequestHandler<TestRequest, Gatewa
                 translatedAnwsers.put(translateTextResult.getTranslatedText());
                 }
             }
-            sb.append(translatedAnwsers.toString());
-
             TranslateTextRequest translateTextRequest = new TranslateTextRequest()
                 .withText(text)
                 .withSourceLanguageCode(sourceLanguage)
@@ -80,16 +78,19 @@ public class TranslateTestTemplate implements RequestHandler<TestRequest, Gatewa
             String type = question.getString("type");
             JSONObject translatedQuestion = new JSONObject();
             translatedQuestion.put("type",type);
-            translatedQuestion.put("text",text);
-            translatedQuestion.put("answers",answers);
-
-           returned =translateTextResult.getTranslatedText();
-
+            translatedQuestion.put("text",translatedText);
+            translatedQuestion.put("answers",translatedAnwsers);
+            JSONObject translatedQuestionRoot = new JSONObject();
+            translatedQuestionRoot.put("question",translatedQuestion);
+            translatedQuestionsArray.put(translatedQuestionRoot);
         }
+        translatedQuestionsArrayRoot.put("questions",translatedQuestionsArray);
+        translatedTest.put(testName+targetLanguage,translatedQuestionsArrayRoot);
+
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
-        return new GatewayResponse(sb.toString(),headers,200);
+        return new GatewayResponse(translatedTest.toString(),headers,200);
     }
 }
 
