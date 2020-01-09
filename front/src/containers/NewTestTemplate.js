@@ -54,7 +54,7 @@ class NewTestTemplate extends React.Component {
 
     handleAddQuestion() {
         let tempTypes = [...this.state.types];
-        tempTypes.push("open");
+        tempTypes.push("o");
         this.setState({types: tempTypes});
 
         let tempTexts = [...this.state.texts];
@@ -150,13 +150,17 @@ class NewTestTemplate extends React.Component {
             }
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Successfully saved new test template");
+                if (xhr.readyState === 4) {
+                    if (JSON.parse(xhr.responseText).statusCode === 400) {
+                        alert("Test already exists in database");
+                    } else {
+                        alert("Successfully saved new test template");
+                        this.setState({count: 0, id: "", language: "EN", types: [], texts: [], answers: []});
+                    }
                 }
-            };
+            }.bind(this);
             xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate", true);
             xhr.send(JSON.stringify({"ID": this.state.id + this.state.language, "JSON": JSON.stringify(contents)}));
-            this.setState({count: 0, id: "", language: "EN", types: [], texts: [], answers: []});
         }
     }
 
@@ -169,9 +173,9 @@ class NewTestTemplate extends React.Component {
                         <InputGroup>
                             <InputGroup.Addon>Question {i + 1} type</InputGroup.Addon>
                             <FormControl componentClass="select" value={this.state.types[i]} onChange={(event) => this.handleChangeType(event, i)}>
-                                <option value="open">Open</option>
-                                <option value="numeric">Numeric</option>
-                                <option value="choice">Choice</option>
+                                <option value="o">Open</option>
+                                <option value="n">Numeric</option>
+                                <option value="c">Choice</option>
                             </FormControl>
                             <InputGroup.Button onClick={() => this.handleDeleteQuestion(i)}>
                                 <Button style={{backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>Delete question</Button>
@@ -194,7 +198,7 @@ class NewTestTemplate extends React.Component {
 
     renderAnswer(i) {
         switch (this.state.types[i]) {
-            case "open":
+            case "o":
                 return (
                     <FormGroup>
                         <InputGroup>
@@ -203,7 +207,7 @@ class NewTestTemplate extends React.Component {
                         </InputGroup>
                     </FormGroup>
                 );
-            case "numeric":
+            case "n":
                 return (
                     <FormGroup>
                         <InputGroup>
@@ -212,7 +216,7 @@ class NewTestTemplate extends React.Component {
                         </InputGroup>
                     </FormGroup>
                 );
-            case "choice":
+            case "c":
                 let answers = [];
                 for (let j = 0; j < this.state.answers[i].length; j++) {
                     answers.push(

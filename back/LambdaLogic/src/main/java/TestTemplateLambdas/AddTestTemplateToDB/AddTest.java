@@ -21,12 +21,15 @@ public class AddTest implements RequestHandler<Test, GatewayResponse> {
 
     public GatewayResponse handleRequest(Test request, Context context)
     {
-        mapper.save(request);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
+        if (mapper.load(Test.class, request.getID()) != null) {
+            String output = "Failed";
+            return new GatewayResponse(output, headers, 400);
+        }
+        mapper.save(request);
         String output = "Test Template saved successfully";
-
         return new GatewayResponse(output, headers, 200);
     }
 }
