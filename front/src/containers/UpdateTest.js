@@ -242,7 +242,7 @@ class UpdateTest extends React.Component {
                         <FormGroup>
                             <InputGroup>
                                 <InputGroup.Addon>Test name</InputGroup.Addon>
-                                <FormControl type="text" value={this.state.id} onChange={(event) => this.handleChangeId(event)}/>
+                                <FormControl type="text" readOnly value={this.state.id}/>
                             </InputGroup>
                         </FormGroup>
                         <hr style={{backgroundColor: "#333333", height: 2}}/>
