@@ -29,7 +29,7 @@ class NewTestTemplate extends React.Component {
 
         let tempAnswers = [...this.state.answers];
         if (Array.isArray(tempAnswers[i])) {
-            tempAnswers[i] = "";
+            tempAnswers[i] = [];
             this.setState({answers: tempAnswers});
         }
     }
@@ -38,12 +38,6 @@ class NewTestTemplate extends React.Component {
         let temp = [...this.state.texts];
         temp[i] = event.target.value;
         this.setState({texts: temp});
-    }
-
-    handleChangeAnswer(event, i) {
-        let temp = [...this.state.answers];
-        temp[i] = [event.target.value];
-        this.setState({answers: temp});
     }
 
     handleChangeMultipleAnswer(event, i, j) {
@@ -62,10 +56,11 @@ class NewTestTemplate extends React.Component {
         this.setState({texts: tempTexts});
 
         let tempAnswers = [...this.state.answers];
-        tempAnswers.push([""]);
+        tempAnswers.push([]);
         this.setState({answers: tempAnswers});
 
         this.setState({count: this.state.count + 1});
+        console.log(this.state.answers);
     }
 
     handleDeleteQuestion(i) {
@@ -82,6 +77,7 @@ class NewTestTemplate extends React.Component {
         this.setState({answers: tempAnswers});
 
         this.setState({count: this.state.count - 1});
+        console.log(this.state.answers);
     }
 
     handleAddAnswer(i) {
@@ -122,9 +118,6 @@ class NewTestTemplate extends React.Component {
                         return false;
                     }
                 }
-            } else if (this.state.answers[i].trim() === "") {
-                answersOk = false;
-                return false;
             }
         }
 
@@ -133,6 +126,7 @@ class NewTestTemplate extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state);
         if (!this.validateInput()) {
             alert("Every field must contain a value");
         } else {
@@ -197,52 +191,31 @@ class NewTestTemplate extends React.Component {
     }
 
     renderAnswer(i) {
-        switch (this.state.types[i]) {
-            case "o":
-                return (
-                    <FormGroup>
-                        <InputGroup>
-                            <InputGroup.Addon>Answer {i + 1}</InputGroup.Addon>
-                            <FormControl type="text" value={this.state.answers[i]} onChange={(event) => this.handleChangeAnswer(event, i)}/>
-                        </InputGroup>
-                    </FormGroup>
-                );
-            case "n":
-                return (
-                    <FormGroup>
-                        <InputGroup>
-                            <InputGroup.Addon>Answer {i + 1}</InputGroup.Addon>
-                            <FormControl type="number" value={this.state.answers[i]} onChange={(event) => this.handleChangeAnswer(event, i)}/>
-                        </InputGroup>
-                    </FormGroup>
-                );
-            case "c":
-                let answers = [];
-                for (let j = 0; j < this.state.answers[i].length; j++) {
-                    answers.push(
-                        <div key={i + " " + j}>
-                            <FormGroup>
-                                <InputGroup>
-                                    <InputGroup.Addon>Answer {i + 1}.{j + 1}</InputGroup.Addon>
-                                    <FormControl type="text" value={this.state.answers[i][j]} onChange={(event) => this.handleChangeMultipleAnswer(event, i, j)}/>
-                                    <InputGroup.Button onClick={() => this.handleDeleteAnswer(i, j)}>
-                                        <Button style={{backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>Delete answer</Button>
-                                    </InputGroup.Button>
-                                </InputGroup>
-                            </FormGroup>
-                        </div>
-                    );
-                }
+        if (this.state.types[i] === "c") {
+            let answers = [];
+            for (let j = 0; j < this.state.answers[i].length; j++) {
                 answers.push(
-                    <div key={this.state.answers[i].length + 1}>
-                        <Button style={{backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}} onClick={() => this.handleAddAnswer(i)}>
-                            New answer
-                        </Button>
+                    <div key={i + " " + j}>
+                        <FormGroup>
+                            <InputGroup>
+                                <InputGroup.Addon>Answer {i + 1}.{j + 1}</InputGroup.Addon>
+                                <FormControl type="text" value={this.state.answers[i][j]} onChange={(event) => this.handleChangeMultipleAnswer(event, i, j)}/>
+                                <InputGroup.Button onClick={() => this.handleDeleteAnswer(i, j)}>
+                                    <Button style={{backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>Delete answer</Button>
+                                </InputGroup.Button>
+                            </InputGroup>
+                        </FormGroup>
                     </div>
                 );
-                return answers;
-            default:
-                break;
+            }
+            answers.push(
+                <div key={this.state.answers[i].length + 1}>
+                    <Button style={{backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}} onClick={() => this.handleAddAnswer(i)}>
+                        New answer
+                    </Button>
+                </div>
+            );
+            return answers;
         }
     }
 

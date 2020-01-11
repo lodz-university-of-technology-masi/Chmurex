@@ -4,7 +4,10 @@ import { Button } from "react-bootstrap";
 class ListTests extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {tests: []};
+        this.state = {
+            tests: [],
+            loaded: false
+        };
 
         this.getTests();
     }
@@ -15,6 +18,7 @@ class ListTests extends React.Component {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let body = JSON.parse(xhr.responseText).body;
                 this.setState({tests: JSON.parse(body).tests});
+                this.setState({loaded: true});
             }
         }.bind(this);
         xhr.open("GET", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/gettesttemplates", true);
@@ -65,29 +69,37 @@ class ListTests extends React.Component {
     }
 
     render() {
-        return (
-            <div className="ListTests">
-                <h1>Test list</h1>
-                <table className="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Test name</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderTable()}
-                    </tbody>
-                </table>
-                <Button onClick={this.props.history.goBack}>
-                    Back
-                </Button>
-                <Button onClick={() => this.createNewTest()}>
-                    Create a new test
-                </Button>
-            </div>
-        );
+        if (!this.state.loaded) {
+            return (
+                <div className="UpdateTest">
+                    <h1>Loading</h1>
+                </div>
+            );
+        } else {
+            return (
+                <div className="ListTests">
+                    <h1>Test list</h1>
+                    <table className="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Test name</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderTable()}
+                        </tbody>
+                    </table>
+                    <Button onClick={this.props.history.goBack}>
+                        Back
+                    </Button>
+                    <Button onClick={() => this.createNewTest()}>
+                        Create a new test
+                    </Button>
+                </div>
+            );
+        }
     }
 }
 
