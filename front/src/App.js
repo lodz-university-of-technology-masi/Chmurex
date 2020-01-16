@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import {Link, NavLink, withRouter} from "react-router-dom";
+import { Nav, Navbar, NavItem, Button } from "react-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap";
@@ -9,6 +9,7 @@ import logo from "./components/najlepszeLogo.png"
 function App(props) {
     const [isAuthenticated, userHasAuthenticated] = useState(false);
     const [isAuthenticating, setIsAuthenticating] = useState(true);
+    const [homeUrl, setHomeUrl] = useState("/");
 
     useEffect(() => {
         onLoad();
@@ -31,16 +32,33 @@ function App(props) {
     async function handleLogout() {
         await Auth.signOut();
         userHasAuthenticated(false);
-
-        props.history.push("/login");
+        setHomeUrl("/");
+        props.history.push("/");
     }
+
+    async function handleHome() {
+        Auth.currentAuthenticatedUser()
+            .then(user => Auth.userAttributes(user))
+            .then(attributes => checkUser(attributes));
+        props.history.push(homeUrl);
+    }
+
+    function checkUser(attributes) {
+        if (attributes[2].getValue() === "1") {
+            setHomeUrl("/recruiter");
+        } else {
+            setHomeUrl("/candidate");
+        }
+    }
+
     return (
         !isAuthenticating &&
         <div className="App container">
             <Navbar fluid collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="/">Recruit</Link>
+                        {/*tu jest problem, chciałem żeby wciśnięcie home przenosiło do strony głównej kandydata albo rekrutera w zależności od tego, kto jest zalogowany, ale coś nie wyszło xd*/}
+                        <Link onClick={handleHome}>Home</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -49,9 +67,6 @@ function App(props) {
                         {isAuthenticated
                             ? <NavItem onClick={handleLogout}>Logout</NavItem>
                             : <>
-                                <LinkContainer to="/signup">
-                                    <NavItem>Signup</NavItem>
-                                </LinkContainer>
                                 <LinkContainer to="/login">
                                     <NavItem>Login</NavItem>
                                 </LinkContainer>

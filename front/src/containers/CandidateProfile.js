@@ -50,9 +50,8 @@ class CandidateProfile extends React.Component {
                         </Button>
                     </div>
                 </form>
-                {/*tutaj zrobilem zwykle przekierowanie do url'a zamiast props.history.goBack, bo po submicie trzeba by bylo klikac 2 razy*/}
-                <Button block bsSize="large" onClick={event => window.location.href='/candidate'}>
-                    Go Back
+                <Button block bsSize="large" onClick={this.props.history.goBack}>
+                    Back
                 </Button>
             </div>
         );

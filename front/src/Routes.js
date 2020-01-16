@@ -22,9 +22,8 @@ import FillOutTest from "./containers/FillOutTest";
 export default function Routes({ appProps }) {
     return (
         <Switch>
-            <AppliedRoute path="/" exact component={Home} appProps={appProps} />
-            <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
-
+            {/*<AppliedRoute path="/" exact component={Home} appProps={appProps} />*/}
+            <AppliedRoute path="/" exact component={Login} appProps={appProps} />
             <Route path="/recruiter" exact component={RecruiterMain} appProps={appProps} />
             <Route path="/recruiter/csvimport" exact component={CsvImport} appProps={appProps} />
             <Route path="/recruiter/addnewcandidate" exact component={AddNewCandidate} appProps={appProps} />

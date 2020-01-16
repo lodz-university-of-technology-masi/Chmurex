@@ -43,7 +43,7 @@ class CandidateTests extends React.Component{
                                         <tr key={"sectablerow" + key}>
                                             <td key={this.state.assignedTests.tests[key] + "1"}>{ this.state.assignedTests.tests[key].test.testID }</td>
                                             <td key={this.state.assignedTests.tests[key] + "2"}>
-                                                Tests finished
+                                                Test finished
                                             </td>
                                         </tr>
                                     );
@@ -68,7 +68,9 @@ class CandidateTests extends React.Component{
                     </tbody>
                 }
                 </table>
-
+                <Button onClick={this.props.history.goBack}>
+                    Back
+                </Button>
 
 
             </div>

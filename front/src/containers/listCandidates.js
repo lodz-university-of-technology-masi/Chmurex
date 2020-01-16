@@ -55,6 +55,9 @@ class ListCandidates extends React.Component{
                         }                        
                     </tbody>                    
                 </table>
+                <Button onClick={this.props.history.goBack}>
+                    Back
+                </Button>
             </div>
             );
     }

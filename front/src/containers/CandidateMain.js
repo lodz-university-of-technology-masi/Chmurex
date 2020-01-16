@@ -22,9 +22,6 @@ export default function CandidateMain(props) {
             <Button block bsSize="large" onClick={viewTests}>
                 View your tests
             </Button>
-            <Button block bsSize="large" onClick={props.history.goBack}>
-                Go Back
-            </Button>
         </div>
     );
 }
