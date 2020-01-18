@@ -85,7 +85,7 @@ public class TranslateTestTemplate implements RequestHandler<TestRequest, Gatewa
             translatedQuestionsArray.put(translatedQuestionRoot);
         }
         translatedQuestionsArrayRoot.put("questions",translatedQuestionsArray);
-        translatedTest.put(testName+targetLanguage,translatedQuestionsArrayRoot);
+        translatedTest.put("Questions" + testName+targetLanguage,translatedQuestionsArrayRoot);
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
