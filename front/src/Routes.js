@@ -12,6 +12,7 @@ import CandidateTests from "./containers/CandidateTests";
 import AddNewCandidate from "./containers/AddNewCandidate"
 import ListCandidates from "./containers/listCandidates"
 import RemoveCandidate from "./containers/removeCandidate"
+import Translate from "./containers/Translate"
 
 import ListTests from "./containers/ListTests";
 import UpdateTest from "./containers/UpdateTest";
@@ -38,6 +39,7 @@ export default function Routes({ appProps }) {
             <Route path="/recruiter/listCandidates/removeCandidate" exact component={RemoveCandidate} appProps={appProps}/>
             <Route path="/recruiter/listCandidates/assignTestsToCandidate" exact component={AssignTestsToCandidate} appProps={appProps}/>
             <Route path="/candidate/tests/fillOutTest" exact component={FillOutTest} appProps={appProps}/>
+            <Route path="/recruiter/tests/translate" exact component={Translate} appProps={appProps} />
             <Route component={NotFound} />
         </Switch>
     );

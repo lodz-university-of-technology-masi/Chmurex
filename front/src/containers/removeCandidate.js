@@ -31,7 +31,7 @@ class RemoveCandidate extends React.Component{
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/removecandidate",true);
         xhr.onload = function () {
-            console.log("usuwankoo");
+            
         };
         xhr.send('{"user":"'+ user +'"}');
         this.goBack();
