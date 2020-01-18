@@ -76,6 +76,7 @@ class CsvImport extends React.Component{
 
     validateData() {
         let data = this.state.data;
+        console.log(data);
         let returned = true;
         const keys = Object.keys(data);
         for (const key in keys){
@@ -89,19 +90,51 @@ class CsvImport extends React.Component{
 
     handleSubmit(event){
         let data = this.state.data;
+        console.log(data);
         let contents = {};
-        let name = "Questions" + data[0][0] + data[0][1];
+        let name = "Questions" + this.state.id + this.state.language;
+        console.log(name);
         contents[name] = {"questions": []};
         const keys = Object.keys(data);
         for (const key in keys){
-            if(data[key][1] !== ""){
-                contents[name]["questions"].push({
-                    "question": {
-                        "type": data[key][1],
-                        "text": data[key][2],
-                        "answers": data[key][3]
+            let type = data[key][1];
+            if(type !== ""){
+                switch(type){
+                    case "O":
+                        type = "o";
+                        break;
+                    case "W":
+                        type = "c";
+                        break;
+                    case "L":
+                        type = "n";
+                        break;
+                }
+                if(type !== "c")
+                {
+                    contents[name]["questions"].push({
+                        "question": {
+                            "type": type,
+                            "text": data[key][2],
+                            "answers": []
+                        }
+                    });
+                }
+                else{
+                    let numbers = data[key][3];
+                    let array = [];
+                    for(let i = 0;i<numbers;i++) {
+                        array.push(data[key][4+i]);
                     }
-                });
+                    contents[name]["questions"].push({
+                        "question": {
+                            "type": type,
+                            "text": data[key][2],
+                            "answers": array
+                        }
+                    });
+                }
+
             }
         }
         event.preventDefault();
