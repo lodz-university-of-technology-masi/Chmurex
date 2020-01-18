@@ -52,6 +52,7 @@ class Translate extends React.Component {
                 }
             }
         }.bind(this);
+        console.log((this.state.body));
         req.open('POST', 'https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/newtesttemplate', false);
         req.send(JSON.stringify({"ID":this.state.id + lang, "JSON":this.state.body}));
     }
