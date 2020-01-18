@@ -29,6 +29,10 @@ class ListTests extends React.Component {
         this.props.history.push("/recruiter/tests/updatetest?id=" + this.state.tests[i]);
     }
 
+    handleTranslateTest(i) {
+        this.props.history.push("/recruiter/tests/translate?id=" + this.state.tests[i]);
+    }
+
     handleDeleteTest(i) {
         let xhr = new XMLHttpRequest();
         let self = this;
@@ -46,6 +50,25 @@ class ListTests extends React.Component {
         this.props.history.push("/recruiter/tests/newtesttemplate");
     }
 
+    checkIfTranslationExists(i){
+        let test = this.state.tests[i];
+        let testLanguage = test.substring(test.length-2,test.length);
+        let testName = test.substring(0,test.length-2);
+        let opositeLanguage;
+        if(testLanguage === "EN"){
+         opositeLanguage = "PL";
+        }
+        else{
+         opositeLanguage = "EN";
+        }
+        let opositeTest = testName + opositeLanguage;
+        console.log(opositeTest);
+        if(this.state.tests.includes(opositeTest) ){
+            return true;
+        }
+        return false;
+    }
+
     renderTable() {
         let rows = [];
         for (let i = 0; i < this.state.tests.length; i++) {
@@ -60,6 +83,11 @@ class ListTests extends React.Component {
                     <td>
                         <Button onClick={() => this.handleDeleteTest(i)}>
                             Delete
+                        </Button>
+                    </td>
+                    <td>
+                        <Button disabled={this.checkIfTranslationExists(i)} onClick={() => this.handleTranslateTest(i)} >
+                            Translate
                         </Button>
                     </td>
                 </tr>
@@ -85,6 +113,7 @@ class ListTests extends React.Component {
                                 <th>Test name</th>
                                 <th>Update</th>
                                 <th>Delete</th>
+                                <th>Translate</th>
                             </tr>
                         </thead>
                         <tbody>
