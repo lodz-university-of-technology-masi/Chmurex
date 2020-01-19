@@ -13,6 +13,18 @@ class ListCandidates extends React.Component{
         };
     }
     render() {
+        if(this.state.completed === 'Loading'){
+            return (
+                <div className="ListCandidates">
+                    <h1>
+                        {this.state.completed}
+                    </h1>
+                </div>
+            )
+        }
+        else {
+
+
         return (
             <div className="ListCandidates">
                 <h1>
@@ -31,7 +43,7 @@ class ListCandidates extends React.Component{
                         {                
                             Object.keys(this.state.users).map((key) => {
                             return( 
-                            <tr>
+                            <tr key={"candidatelistemailtablepart" + key}>
                                 <td>{ this.state.users[key].sub }</td>
                                 <td>{ this.state.users[key].email }</td>
                                 <td>
@@ -60,6 +72,7 @@ class ListCandidates extends React.Component{
                 </Button>
             </div>
             );
+        }
     }
 
     removeCandidate = (sub,email) => {
@@ -103,6 +116,7 @@ class ListCandidates extends React.Component{
                     let text = req.responseText;
                     let obj = JSON.parse(text);
                     let usersObjects = JSON.parse(obj.body);
+                    console.log(usersObjects);
                     callback.call(self, usersObjects);
                     callback2.call(self,'Candidate list');
                 }

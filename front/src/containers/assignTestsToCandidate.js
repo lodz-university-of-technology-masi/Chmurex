@@ -1,5 +1,6 @@
 import React from "react";
 import {Button} from "react-bootstrap";
+import {Auth} from "aws-amplify";
 
 class AssignTestsToCandidate extends React.Component{
     constructor(props) {
@@ -7,9 +8,16 @@ class AssignTestsToCandidate extends React.Component{
         this.state = {
             assignedTests: JSON.parse('{"tests":[]}'),
             mainMessage: "loading",
-            testsToAssign: JSON.parse('{"tests":[]}'),
-            nextTestsMessage: "loading", ready: false
-        }
+            testsToAssign: JSON.parse('{"testContents":{"tests":[]},"tests":[]}'),
+            nextTestsMessage: "loading", ready: false,
+            ownerKnown: false,
+            testOwnerEmail: ""
+        };
+        Auth.currentAuthenticatedUser().then(user => {
+            console.log(user.attributes.email);
+            this.setState({testOwnerEmail: user.attributes.email, ownerKnown: true});
+
+        });
     }
 
     render() {
@@ -50,7 +58,6 @@ class AssignTestsToCandidate extends React.Component{
                     <tbody>
                     {
                         Object.keys(this.state.testsToAssign.tests).map((key) => {
-
                             if(this.state.ready){
                                 return(
                                     <tr key={"sectablerow" + key}>
@@ -69,21 +76,37 @@ class AssignTestsToCandidate extends React.Component{
                     </tbody>
                 }
                 </table>
+                <Button onClick={this.props.history.goBack} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
+                    Back
+                </Button>
             </div>
         );
     }
 
     removeDuplicates(){
+        console.log(this.state.testsToAssign);
+        console.log(this.state.testOwnerEmail);
         let createdTab = [];
+        let createdContentsTab = [];
         this.state.testsToAssign.tests.forEach((unassignedTest, index) => {
             let rewriteFlag = true;
+            let key = Object.keys(JSON.parse(this.state.testsToAssign.testContents[index].JSON))[0];
+            console.log(JSON.parse(this.state.testsToAssign.testContents[index].JSON)[key]["owner"]);
+            if(JSON.parse(this.state.testsToAssign.testContents[index].JSON)[key]["owner"] !== this.state.testOwnerEmail)
+            {rewriteFlag = false;}
             this.state.assignedTests.tests.forEach(assignedTest => {
-                if(unassignedTest === assignedTest.test.testID){rewriteFlag = false;}
-            })
-            if(rewriteFlag){createdTab.push(unassignedTest);}
+                if(unassignedTest === assignedTest.test.testID)
+                {rewriteFlag = false;}
+            });
+            if(rewriteFlag){
+                createdTab.push(unassignedTest);
+                createdContentsTab.push(this.state.testsToAssign.testContents[index])
+            }
         });
         this.state.testsToAssign.tests = createdTab;
+        this.state.testsToAssign.testContents = createdContentsTab;
         this.setState({ready: true});
+        console.log(this.state.testsToAssign);
     }
 
     componentDidMount(){this.getAssignmentTable(this.setAssignedTests, this.setMainMessage);}
@@ -142,7 +165,6 @@ class AssignTestsToCandidate extends React.Component{
         };
         let stringifiedTest = JSON.stringify(this.state.assignedTests);
         xhr.open("POST", "https://lrjyi691l7.execute-api.us-east-1.amazonaws.com/Prod/recruiter/assigntest");
-        console.log(JSON.stringify({"email": this.props.location.state.email, "JSON": stringifiedTest}));
         xhr.send(JSON.stringify({"email": this.props.location.state.email, "JSON": stringifiedTest}));
     }
 }

@@ -15,7 +15,7 @@ class AddNewCandidate extends React.Component {
 
     validateInput(){
         return this.state.email.length > 0 &&
-        this.state.password.length > 6
+        this.state.password.length > 5
     };
     
     handleSubmit() {
@@ -27,6 +27,13 @@ class AddNewCandidate extends React.Component {
         xhr.onload = function () {
             console.log("dodawanko");
         };
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log("Added successfuly");
+                }
+            }
+        }
         xhr.send('{"email":"'+ this.state.email+'","password":"'+this.state.password+'"}')
     }
 

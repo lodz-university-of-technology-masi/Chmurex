@@ -11,7 +11,7 @@ class CandidateTests extends React.Component{
             mainMessage: "loading",
             email: "",
             ready: false
-        }
+        };
         Auth.currentAuthenticatedUser().then(user => {
                 console.log(user.attributes.email);
                 this.setState({email: user.attributes.email});
