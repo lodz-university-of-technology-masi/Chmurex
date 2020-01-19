@@ -1,5 +1,6 @@
 import React from "react"
 import { Button, Form, FormControl, FormGroup, InputGroup } from "react-bootstrap";
+import {Auth} from "aws-amplify";
 
 class NewTestTemplate extends React.Component {
     constructor(props) {
@@ -12,6 +13,10 @@ class NewTestTemplate extends React.Component {
             texts: [],
             answers: []
         };
+        Auth.currentAuthenticatedUser().then(user => {
+            console.log(user.attributes.email);
+            this.setState({email: user.attributes.email});
+        });
     }
 
     handleChangeId(event) {
@@ -142,7 +147,9 @@ class NewTestTemplate extends React.Component {
                     }
                 });
             }
+            contents[name]["owner"] = this.state.email;
             let xhr = new XMLHttpRequest();
+            console.log(contents);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (JSON.parse(xhr.responseText).statusCode === 400) {
