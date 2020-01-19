@@ -60,7 +60,6 @@ class NewTestTemplate extends React.Component {
         this.setState({answers: tempAnswers});
 
         this.setState({count: this.state.count + 1});
-        console.log(this.state.answers);
     }
 
     handleDeleteQuestion(i) {
@@ -77,7 +76,6 @@ class NewTestTemplate extends React.Component {
         this.setState({answers: tempAnswers});
 
         this.setState({count: this.state.count - 1});
-        console.log(this.state.answers);
     }
 
     handleAddAnswer(i) {

@@ -199,7 +199,7 @@ class UpdateTest extends React.Component {
     }
 
     renderAnswer(i) {
-        if (this.state.types[i] === "c") {
+        if (this.state.types[i] === "c" && Array.isArray(this.state.answers[i])) {
             let answers = [];
             for (let j = 0; j < this.state.answers[i].length; j++) {
                 answers.push(
