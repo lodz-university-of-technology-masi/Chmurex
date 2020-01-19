@@ -14,16 +14,10 @@ export default function CandidateMain(props) {
     return (
         <div className="CandidateMain">
             <h1>
-                Candidate Placeholder Page
+                Candidate Page
             </h1>
-            <Button block bsSize="large" onClick={viewProfile}>
-                View your profile details
-            </Button>
             <Button block bsSize="large" onClick={viewTests}>
                 View your tests
-            </Button>
-            <Button block bsSize="large" onClick={props.history.goBack}>
-                Go Back
             </Button>
         </div>
     );

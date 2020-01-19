@@ -32,27 +32,18 @@ function App(props) {
         await Auth.signOut();
         userHasAuthenticated(false);
 
-        props.history.push("/login");
+        props.history.push("/");
     }
     return (
         !isAuthenticating &&
         <div className="App container">
             <Navbar fluid collapseOnSelect>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <Link to="/">Recruit</Link>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
                         {isAuthenticated
                             ? <NavItem onClick={handleLogout}>Logout</NavItem>
                             : <>
-                                <LinkContainer to="/signup">
-                                    <NavItem>Signup</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to="/login">
+                                <LinkContainer to="/">
                                     <NavItem>Login</NavItem>
                                 </LinkContainer>
                             </>

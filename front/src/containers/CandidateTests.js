@@ -69,7 +69,9 @@ class CandidateTests extends React.Component{
                 }
                 </table>
 
-
+                <Button block onClick={this.props.history.goBack}>
+                    Go Back
+                </Button>
 
             </div>
         );

@@ -22,7 +22,7 @@ export default function RecruiterMain(props) {
     return (
         <div className="RecruiterMain">
             <h1>
-                Recruiter Placeholder Page
+                Recruiter Page
             </h1>
             <Button block bsSize="large"  onClick={tests}>
                 Tests
