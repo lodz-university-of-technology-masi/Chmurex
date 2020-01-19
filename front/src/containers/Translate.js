@@ -49,7 +49,6 @@ class Translate extends React.Component {
                     alert("Test already exists in database");
                 } else {
                     alert("Successfully saved new test template");
-                    this.props.history.push("/recruiter/tests");
                 }
             }
         }.bind(this);
