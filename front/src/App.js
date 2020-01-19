@@ -32,7 +32,11 @@ function App(props) {
         await Auth.signOut();
         userHasAuthenticated(false);
 
-        props.history.push("/login");
+        props.history.push({
+            pathname: "/login",
+            state: { loggedIn: false,
+                isRecruiter: false}
+        })
     }
     return (
         !isAuthenticating &&

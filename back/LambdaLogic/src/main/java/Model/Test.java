@@ -7,8 +7,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 @DynamoDBTable(tableName = "TestTemplates")
 public class Test {
     private String ID;
-
-
     private String JSON;
 
     @DynamoDBHashKey(attributeName = "TestId")
