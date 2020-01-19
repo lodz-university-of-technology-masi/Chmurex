@@ -47,6 +47,7 @@ public class TranslateTestTemplate implements RequestHandler<TestRequest, Gatewa
         JSONObject translatedQuestions = new JSONObject();
         JSONObject questions = (JSONObject) jsonObject.get("Questions"+request.getID());
         JSONArray questionsArray = (JSONArray) questions.get("questions");
+        String owner = (String) questions.get("owner");
         JSONArray translatedQuestionsArray = new JSONArray();
         JSONObject translatedQuestionsArrayRoot = new JSONObject();
         StringBuilder sb = new StringBuilder();
@@ -84,6 +85,7 @@ public class TranslateTestTemplate implements RequestHandler<TestRequest, Gatewa
             translatedQuestionRoot.put("question",translatedQuestion);
             translatedQuestionsArray.put(translatedQuestionRoot);
         }
+        translatedQuestionsArrayRoot.put("owner", owner);
         translatedQuestionsArrayRoot.put("questions",translatedQuestionsArray);
         translatedTest.put("Questions" + testName+targetLanguage,translatedQuestionsArrayRoot);
 

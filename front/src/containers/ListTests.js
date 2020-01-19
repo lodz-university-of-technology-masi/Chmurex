@@ -1,14 +1,20 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import {Auth} from "aws-amplify";
 
 class ListTests extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             tests: [],
-            loaded: false
+            testContents: [],
+            loaded: false,
+            ownerKnown: false
         };
-
+        Auth.currentAuthenticatedUser().then(user => {
+            console.log(user.attributes.email);
+            this.setState({email: user.attributes.email, ownerKnown: true});
+        });
         this.getTests();
     }
 
@@ -17,7 +23,7 @@ class ListTests extends React.Component {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let body = JSON.parse(xhr.responseText).body;
-                this.setState({tests: JSON.parse(body).tests});
+                this.setState({tests: JSON.parse(body).tests, testContents: JSON.parse(body).testContents});
                 this.setState({loaded: true});
             }
         }.bind(this);
@@ -72,32 +78,35 @@ class ListTests extends React.Component {
     renderTable() {
         let rows = [];
         for (let i = 0; i < this.state.tests.length; i++) {
-            rows.push(
-                <tr key={i}>
-                    <td>{this.state.tests[i]}</td>
-                    <td>
-                        <Button onClick={() => this.handleUpdateTest(i)}>
-                            Update
-                        </Button>
-                    </td>
-                    <td>
-                        <Button onClick={() => this.handleDeleteTest(i)}>
-                            Delete
-                        </Button>
-                    </td>
-                    <td>
-                        <Button disabled={this.checkIfTranslationExists(i)} onClick={() => this.handleTranslateTest(i)} >
-                            Translate
-                        </Button>
-                    </td>
-                </tr>
-            )
+            let key = (Object.keys(JSON.parse(this.state.testContents[i].JSON)))[0];
+            if(JSON.parse(this.state.testContents[i].JSON)[key].owner === this.state.email){
+                rows.push(
+                    <tr key={i}>
+                        <td>{this.state.tests[i]}</td>
+                        <td>
+                            <Button onClick={() => this.handleUpdateTest(i)}>
+                                Update
+                            </Button>
+                        </td>
+                        <td>
+                            <Button onClick={() => this.handleDeleteTest(i)}>
+                                Delete
+                            </Button>
+                        </td>
+                        <td>
+                            <Button disabled={this.checkIfTranslationExists(i)} onClick={() => this.handleTranslateTest(i)} >
+                                Translate
+                            </Button>
+                        </td>
+                    </tr>
+                )
+            }
         }
         return rows;
     }
 
     render() {
-        if (!this.state.loaded) {
+        if (!this.state.loaded || !this.state.ownerKnown) {
             return (
                 <div className="UpdateTest">
                     <h1>Loading</h1>

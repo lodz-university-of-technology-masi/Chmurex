@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form, FormControl, FormGroup, InputGroup } from "react-bootstrap";
 import CSVReader from 'react-csv-reader'
+import {Auth} from "aws-amplify";
 
 class CsvImport extends React.Component{
     constructor(props) {
@@ -11,8 +12,13 @@ class CsvImport extends React.Component{
             id: "",
             language:"EN",
             contents:{},
-            file: false
+            file: false,
+            ownerKnown: false
         };
+        Auth.currentAuthenticatedUser().then(user => {
+            console.log(user.attributes.email);
+            this.setState({email: user.attributes.email, ownerKnown: true});
+        });
         this.fileLoaded = this.fileLoaded.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -29,38 +35,58 @@ class CsvImport extends React.Component{
         this.setState({language: event.target.value});
     }
     render() {
-        return (
-            <div className="CsvImport">
-               <h1>
-                    Import test template from csv file
-               </h1>
-               <CSVReader onFileLoaded={this.fileLoaded} />
-               <Form onSubmit={(event) => this.handleSubmit(event)}>
-                    <FormGroup>
-                        <InputGroup>
-                            <InputGroup.Addon>Test name</InputGroup.Addon>
-                            <FormControl type="text" value={this.state.id} onChange={(event) => this.handleChangeId(event)}/>
-                        </InputGroup>
-                    </FormGroup>
-                    <FormGroup>
-                        <InputGroup>
-                            <InputGroup.Addon>Language</InputGroup.Addon>
-                            <FormControl componentClass="select" value={this.state.language} onChange={(event) => this.handleChangeLanguage(event)}>
-                                <option value="EN">English</option>
-                                <option value="PL">Polish</option>
-                            </FormControl>
-                        </InputGroup>
-                    </FormGroup>
-                    <Button type="submit" disabled={!this.validateID()} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
-                        Submit
-                    </Button>
-                    <Button type="button" onClick={this.props.history.goBack} style={{display: "inline-block", backgroundColor: "#00C3ED", color: "#FFFFFF", fontWeight: "bold"}}>
-                        Go back
-                    </Button>
-                </Form>
-
-            </div>
+        if (!this.state.ownerKnown) {
+            return (
+                <div className="CsvImportLoading">
+                    <h1>Loading</h1>
+                </div>
             );
+        } else {
+            return (
+                <div className="CsvImport">
+                    <h1>
+                        Import test template from csv file
+                    </h1>
+                    <CSVReader onFileLoaded={this.fileLoaded}/>
+                    <Form onSubmit={(event) => this.handleSubmit(event)}>
+                        <FormGroup>
+                            <InputGroup>
+                                <InputGroup.Addon>Test name</InputGroup.Addon>
+                                <FormControl type="text" value={this.state.id}
+                                             onChange={(event) => this.handleChangeId(event)}/>
+                            </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                            <InputGroup>
+                                <InputGroup.Addon>Language</InputGroup.Addon>
+                                <FormControl componentClass="select" value={this.state.language}
+                                             onChange={(event) => this.handleChangeLanguage(event)}>
+                                    <option value="EN">English</option>
+                                    <option value="PL">Polish</option>
+                                </FormControl>
+                            </InputGroup>
+                        </FormGroup>
+                        <Button type="submit" disabled={!this.validateID()} style={{
+                            display: "inline-block",
+                            backgroundColor: "#00C3ED",
+                            color: "#FFFFFF",
+                            fontWeight: "bold"
+                        }}>
+                            Submit
+                        </Button>
+                        <Button type="button" onClick={this.props.history.goBack} style={{
+                            display: "inline-block",
+                            backgroundColor: "#00C3ED",
+                            color: "#FFFFFF",
+                            fontWeight: "bold"
+                        }}>
+                            Go back
+                        </Button>
+                    </Form>
+
+                </div>
+            );
+        }
     }
 
     fileLoaded(data) {
@@ -137,6 +163,7 @@ class CsvImport extends React.Component{
 
             }
         }
+        contents[name]["owner"] = this.state.email;
         event.preventDefault();
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {

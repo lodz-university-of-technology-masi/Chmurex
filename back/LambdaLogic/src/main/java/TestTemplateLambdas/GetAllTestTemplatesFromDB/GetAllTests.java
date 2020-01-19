@@ -32,6 +32,7 @@ public class GetAllTests implements RequestHandler<List<TestRequest>, GatewayRes
         }
         JSONObject json = new JSONObject();
         json.append("tests", ids);
+        json.append("testContents", tests);
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("X-Custom-Header", "application/json");
